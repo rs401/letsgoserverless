@@ -1,14 +1,13 @@
-import { useAuthenticator } from '@aws-amplify/ui-react';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { Outlet } from "react-router-dom";
 import ReactRotatingText from "react-rotating-text";
-import './App.css';
+import "./App.css";
 
-import { withAuthenticator } from "@aws-amplify/ui-react";
-import '@aws-amplify/ui-react/styles.css';
+import { useAuthenticator, withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 
 function App() {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
@@ -20,19 +19,21 @@ function App() {
     "mountain biking 🚴",
     "UFO spotting 🛸 👽",
     "Running 🏃",
+    "Magnet fishing 🧲",
   ];
   let accountNav;
 
-  if(user) {
-    console.log('user: ', user);
-    accountNav = <>
-      <Nav.Link >Welcome, {user.attributes.nickname}!</Nav.Link>;
-      <Nav.Link onClick={signOut}>Sign Out</Nav.Link>;
-    </>
+  if (user) {
+    console.log("user: ", user);
+    accountNav = (
+      <>
+        <Nav.Link href="/account">Welcome, {user.attributes.nickname}!</Nav.Link>;
+        <Nav.Link onClick={signOut}>Sign Out</Nav.Link>;
+      </>
+    );
   } else {
     accountNav = <Nav.Link href="">SignIn / SignUp</Nav.Link>;
   }
-    
 
   return (
     <Container>
@@ -44,8 +45,8 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/addcat">AddCat</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <Nav.Link href="/">About</Nav.Link>
+              <NavDropdown title="Info" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Another action
@@ -59,15 +60,16 @@ function App() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Nav className="justify-content-end">
-              {accountNav}
-            </Nav>
+            <Nav className="justify-content-end">{accountNav}</Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      Lets Go <ReactRotatingText items={allTheThings} />
+      <div className="p-2">
+        <h3>Lets Go <ReactRotatingText items={allTheThings} /></h3>
+      </div>
       <Outlet />
-      <div className="my-2 p-3 bg-dark text-light">&copy; 2022 Lets Go</div>
+      <div style={{"height": 100}}></div>
+      <div className="mt-4 mb-2 p-3 bg-dark text-light">&copy; 2022 Lets Go</div>
     </Container>
   );
 }

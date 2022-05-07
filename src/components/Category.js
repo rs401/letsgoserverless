@@ -7,10 +7,9 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { useParams, Link } from "react-router-dom";
 import { getStates } from "../services/categorySvc";
 import { listThreads, getCategory } from "../graphql/queries";
-import { Amplify, API, graphqlOperation } from 'aws-amplify';
-import awsExports from '../aws-exports';
+import { Amplify, API, graphqlOperation } from "aws-amplify";
+import awsExports from "../aws-exports";
 Amplify.configure(awsExports);
-
 
 function Category() {
   let params = useParams();
@@ -23,28 +22,34 @@ function Category() {
 
   async function fetchCategory() {
     try {
-      const catData = await API.graphql(graphqlOperation(getCategory,{id: params.catId}));
+      const catData = await API.graphql(
+        graphqlOperation(getCategory, { id: params.catId })
+      );
       const item = catData.data.getCategory;
       setCat(item);
     } catch (err) {
-      console.log('error fetching cat.', err);
+      console.log("error fetching cat.", err);
     }
   }
   async function fetchThreads() {
     try {
-      const threadsData = await API.graphql(graphqlOperation(listThreads,{filter: {categoryThreadsId: {eq: params.catId}}}));
+      const threadsData = await API.graphql(
+        graphqlOperation(listThreads, {
+          filter: { categoryThreadsId: { eq: params.catId } },
+        })
+      );
       const items = threadsData.data.listThreads.items;
       items.sort((a, b) => {
         return a.updatedAt > b.updatedAt ? 1 : -1;
       });
       setThreads(items);
     } catch (err) {
-      console.log('error fetching threads.', err);
+      console.log("error fetching threads.", err);
     }
   }
 
   useEffect(() => {
-    if(!fetched) {
+    if (!fetched) {
       setFetched(true);
       fetchCategory();
       fetchThreads();
@@ -60,10 +65,10 @@ function Category() {
     threads.filter((thread) => thread.state === location);
   }
 
-  if(location === "") {
+  if (location === "") {
     filteredThreads = threads;
   }
-  if(location !== "") {
+  if (location !== "") {
     filteredThreads = threads.filter((thread) => thread.state === location);
   }
 
@@ -85,8 +90,12 @@ function Category() {
       </Form.Select>
       <Card className="my-2 shadow-sm">
         <Card.Body>
-          Category: {cat.name}
-        <Button href={`/newthread/${cat.id}`} variant="outline-primary">New Thread</Button>{' '}
+          <div className="p-3">Category: <h3>{cat.name}</h3></div>
+          <div className="justify-content-end">
+            <Button href={`/newthread/${cat.id}`} variant="outline-primary">
+              New Thread
+            </Button>{" "}
+          </div>
         </Card.Body>
       </Card>
 
