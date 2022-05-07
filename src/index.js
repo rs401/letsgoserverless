@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./components/App";
-import AddCat from "./components/AddCat";
+// import AddCat from "./components/AddCat";
 import CatList from "./components/CatList";
 import Auth from "./components/Auth";
+import Account from "./components/Account";
 import Category from "./components/Category";
 import Thread from "./components/Thread";
 import NewThread from "./components/NewThread";
@@ -20,10 +21,11 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="" element={<CatList />} />
           <Route path="auth" element={<Auth />} />
+          <Route path="account" element={<Account />} />
           <Route path="category/:catId" element={<Category />} />
           <Route path="newthread/:catId" element={<NewThread />} />
           <Route path="thread/:threadId" element={<Thread />} />
-          <Route path="addcat" element={<AddCat />} />
+          {/* <Route path="addcat" element={<AddCat />} /> */}
         </Route>
       </Routes>
     </Router>
