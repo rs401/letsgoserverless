@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "letsgoamp4e661c69": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1lhzfigtv2lln",
+          "type": "manual"
+        }
       }
     }
   }

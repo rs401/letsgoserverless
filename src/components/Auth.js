@@ -1,29 +1,29 @@
 import React, { useEffect } from "react";
-import Spinner from "react-bootstrap/Spinner"
-import { validateUser, setCurrentUser } from "../services/user";
-import { useNavigate } from 'react-router-dom';
+import Spinner from "react-bootstrap/Spinner";
+// import { validateUser, setCurrentUser } from "../services/user";
+import { useNavigate } from "react-router-dom";
 
-const currentURL = window.location.href;
-const afterHash = currentURL.split('#')[1];
+// const currentURL = window.location.href;
+// const afterHash = currentURL.split("#")[1];
 // const token = afterHash.split('access_token=')[1].split('&')[0];
-
 
 const Auth = () => {
   const navigate = useNavigate();
 
-  var token;
-  if(afterHash !== undefined) {
-    token = afterHash.split('access_token=')[1].split('&')[0];
-  } else {
-    token = "";
-  }
-  console.log('token', token);
+  // var token;
+  // if(afterHash !== undefined) {
+  //   token = afterHash.split('access_token=')[1].split('&')[0];
+  // } else {
+  //   token = "";
+  // }
+  // console.log('token', token);
   useEffect(() => {
-    validateUser(token).then((result) => {
-      console.log('result: ', result);
-      setCurrentUser(token);
-      navigate('/');
-    });
+    // validateUser(token).then((result) => {
+    //   console.log('result: ', result);
+    //   setCurrentUser(token);
+    //   navigate('/');
+    // });
+    navigate("/");
   });
 
   return (
