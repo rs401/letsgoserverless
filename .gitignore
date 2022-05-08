@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-node_modules/
 /node_modules
 */node_modules
 /.pnp
@@ -23,16 +22,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# AWS Amplify
-amplify/\#current-cloud-backend
-amplify/.config/local-*
-amplify/backend/amplify-meta.json
-amplify/backend/awscloudformation
-build/
-dist/
-aws-exports.js
-awsconfiguration.json
 
 notes.md
 .env.js
